@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 
 /**
  * @author rfortes on 06/12/20
@@ -14,7 +15,13 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:datasource.properties")
 public class PropertyConfig {
 
-    @Value("${guru.username}")
+    private final Environment environment;
+
+    public PropertyConfig(Environment environment) {
+        this.environment = environment;
+    }
+
+    @Value("${logname}") //Environment variable
     String user;
 
     @Value("${guru.password}")
@@ -28,7 +35,7 @@ public class PropertyConfig {
         FakeDataSource fakeDataSource = new FakeDataSource();
         fakeDataSource.setUser(user);
         fakeDataSource.setPassword(password);
-        fakeDataSource.setUrl(url);
+        fakeDataSource.setUrl(environment.getProperty("java.home")); // JAVA_HOME environment variable
         return fakeDataSource;
     }
 
