@@ -31,7 +31,7 @@ public class PropertyConfigurerConfig {
         return fakeDataSource;
     }
 
-    @Bean
+/*    @Bean
     public static PropertySourcesPlaceholderConfigurer properties(){
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
         configurer.setLocations(new ClassPathResource[]{
@@ -39,6 +39,6 @@ public class PropertyConfigurerConfig {
                 new ClassPathResource("datasource.properties")});
     return configurer;
 
-    }
+    }*/
 
 }
